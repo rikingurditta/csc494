@@ -18,3 +18,7 @@ need guidance on this timeline !
 | Oct 11 | implementation for nested cages done aside from contact      |                                                              |
 | Oct 18 | start implementing IPC                                       |                                                              |
 | Nov 8  | finish implementing IPC? who knows                           |                                                              |
+
+- tinyad - autodiff library
+- start w gradient descent instead of newton's method
+- 

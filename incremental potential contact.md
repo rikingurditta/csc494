@@ -1,5 +1,10 @@
 # Incremental Potential Contact: Intersection- and Inversion-free Large-Deformation Dynamics
 
+$$
+\newcommand{\A}{\mathcal A}
+\DeclareMathOperator{\argmin}{argmin}
+$$
+
 - efficiently time-stepping accurate and consistent simulations of real-world contacting elastic objects remains difficult
 - IPC is new model and algorithm for variationally solving implicitly time-stepped non-linear elastodynamics
 - solves contact problems that are:
@@ -64,7 +69,7 @@ Approach:
 - $f_e$ is the external forces on the nodes
 - $f_d$ is the dissipative forces, i.e. frictional forces
 - $T$ is the total time
-- $\mathcal A$ is the set of admissible trajectories
+- $\A$ is the set of admissible trajectories
 
 We consider the energy
 
@@ -72,8 +77,57 @@ $$
 S(x) = \int_0^T \left( \frac{1}{2} \dot x^T M \dot x + \Psi(x) + x^T \left( f_e + f_d \right) \right) dt
 $$
 
-on $\mathcal A$ the set of admissible trajectories
+on $\A$ the set of admissible trajectories
 
-Let $\mathcal A_1$ be the set of trajectories that are intersection free, i.e. distances between objects are always positive ($d(p, q) > 0$). This set is defined by a strict inequality, so the $\mathcal A_1$ is an open set. We take $\mathcal A$ to be the closure of $\mathcal A_1$, i.e. it is $\mathcal A_1$ union its boundary.
+#### Admissible trajectories
+
+Let $\A_I$ be the set of trajectories that are intersection free, i.e. distances between objects are always positive ($d(p, q) > 0$). This set is defined by a strict inequality, so the $\A_I$ is an open set. We take $\mathcal A$ to be the closure of $\A_I$, i.e. it is $\A_I$ union its boundary.
 
 Note that this isn't the set of trajectories where $d(p, q) \geq 0$, as that would be every trajectory since unsigned distance is nonnegative.
+
+If $x(t)$ is a trajectory with $x(0) = x_0$ being intersection free, and we enforce $d_{i, j}(x(t)) > 0$ for all $t$ (i.e. no pair of mesh primitives $i, j$ intersects at any time $t$), then we know that $x(t)$ is intersection free.
+
+#### Time discretization
+
+Can construct energy so that we can solve time step by minimizing over $x$, given current $x^t$ and $v^t$ as well as time step size $h$
+
+Can use Incremental Potential, e.g. for implicit Euler we have
+
+$$
+E(x, x^t, v^t) = \frac{1}{2} (x - \hat x)^T M (x - \hat x) - h^2 x^T f_d + h^2 \Psi(x) \\
+(\text{where } \hat x = x^t + hv^t + h^2 M^{-1} f_e)
+$$
+
+We can make our time step update subject to our contact constraint by solving
+
+$$
+x^{t+1} = \underset{x}{\argmin} E(x, x^t, v^t),\ x^\tau \in \A \\
+(\text{where $x^\tau$ is the linear path between $x^t$ and $x^{t+1}$})
+$$
+
+#### $\epsilon$-separated admissible trajectories
+
+Two piecewise linear surfaces are $\epsilon$-separated if the distance between their boundary points is at least $\epsilon$ (unless they are on the same element of the boundary)
+
+A trajectory $x$ is in $\A_\epsilon$ if the surfaces stay $\epsilon$-separated for the whole trajectory. So $\A_\epsilon \subset \A_I$
+
+To implement a constraint so that we can solve for trajectories in $\A_\epsilon$, we use a barrier term, i.e. a term in the optimization energy that vanishes when the surfaces are $\epsilon$-separated and blows up as they get closer together. We also need to use continuous collision detection within minimization steps (this constraint alone doesn't ensure that there are no collisions between $x^t$ and $x^{t+1}$)
+
+#### Trajectory accuracies
+
+[TODO]
+
+## Primal barrier contact mechanics
+
+Will discuss friction later
+
+#### Barrier-aware projected newton
+
+```python
+def BarrierAwareProjectedNewton(xt, e):
+    x = xt
+    Chat = ComputeConstraintSet(x, dhat)
+    E_prev = Bt(x, dhat, Chat)
+    xprev = x
+```
+
