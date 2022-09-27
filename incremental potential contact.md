@@ -2,6 +2,7 @@
 
 $$
 \newcommand{\A}{\mathcal A}
+\newcommand{\C}{\mathcal C}
 \DeclareMathOperator{\argmin}{argmin}
 $$
 
@@ -124,10 +125,44 @@ Will discuss friction later
 #### Barrier-aware projected newton
 
 ```python
-def BarrierAwareProjectedNewton(xt, e):
-    x = xt
+def BarrierAwareProjectedNewton(x_t, e):
+    x = x_t
     Chat = ComputeConstraintSet(x, dhat)
     E_prev = Bt(x, dhat, Chat)
-    xprev = x
+    x_prev = x
+    do:
+        H = SPDProject(Laplacian(B_t(x, dhat, Chat)))
+        p = - inv(H) * grad(B_t(x, dhat, Chat))
+        # CCD line search
+        a = min(1, StepSizeUpperBound(x, p, Chat))
+        do:
+            x = x_prev + a * p
+            Chat = ComputeConstraintSet(x, dhat)
+            a = a / 2
+        while B_t(x, dhat, Chat) > E_prev
+        E_prev = B_t(x, dhat, Chat)
+        x_prev = x
+        Update K, BCs, and equality constraints -> supplemental
+    while 1/h * infnorm(p) > e_d
+    return x
 ```
 
+### Barrier-augmented incremental potential
+
+to enforce distance constraints $d_k(x) > 0$ for all $k \in \C$, we construct continuous barrier energy $b$
+
+- only affects motion when primitives are close to collision
+- $k$ are elements of $\C$
+- global barrier energy is then $\displaystyle \kappa \sum_{k \in \C} b(d_k(x))$
+
+can augment time step potential energy with global barrier energy:
+$$
+B_t(x) = E(x, x^t, v^t) + \kappa \sum_{k \in \C} b(d_k(x))
+$$
+
+- $\kappa > 0$ is adaptive conditioning pattern
+  - controls barrier stiffness
+- naively dealing with this would require evaluating barrier energy for every pair of elements aka $\mathcal O(|\mathcal T|^2)$ pairs
+- speed it up by designing smooth barrier functions
+  - allow for exact and efficient barrier energy computations
+  - only need to evaluate distance for a small subset of pairs $k, \ell \in \C$
