@@ -162,7 +162,30 @@ $$
 
 - $\kappa > 0$ is adaptive conditioning pattern
   - controls barrier stiffness
+
 - naively dealing with this would require evaluating barrier energy for every pair of elements aka $\mathcal O(|\mathcal T|^2)$ pairs
-- speed it up by designing smooth barrier functions
+
+- speed it up by designing smooth barrier functions that vanish past some distance
   - allow for exact and efficient barrier energy computations
+
   - only need to evaluate distance for a small subset of pairs $k, \ell \in \C$
+
+  - let $\hat d$ be the furthest distance we want to consider, aka the "safe" distance so that primitives further apart than $\hat d$ do not need any repulsion forces, then we can define a barrier function that smoothly goes to $0$ when passing this distance
+
+  - $$
+    b(d, \hat d) = \begin{cases}
+    -(d - \hat d) \ln(\frac{d}{\hat d}) &\text{if } 0 < d < \hat d \\
+    0 &\text{if } d \geq \hat d
+    \end{cases}
+    $$
+
+  - $$
+    \dfrac{\partial b}{\partial d}(d, \hat d) = \begin{cases}
+    -ln(\frac{d}{\hat d}) - (d - \hat d)\frac{\hat d}{d}) &\text{if } 0 < d < \hat d \\
+    0 &\text{if } d > \hat d
+    \end{cases}
+    $$
+
+  - as we can see, $\displaystyle \lim_{d \to \hat d} \partial_db(d, \hat d) = 0$. The second derivative is also well defined, i.e. $b$ is $C^2$ around $d = \hat d$, so this function decays smoothly enough to be used for 2nd order methods
+
+- using this barrier function, we only need to evaluate barrier energy for pairs that are closer than $\hat d$ together, which we call the *constraint set* $\hat C(x) = \{k \in C : d_k(x) \leq \hat d\}$
