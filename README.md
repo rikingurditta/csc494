@@ -7,6 +7,10 @@ This is my repo for notes I've taken for my CSC494 project on augmenting Nested 
 - [Nested Cages](nested cages)
 - [Incremental Potential Contact](incremental potential contact)
 
+## Other notes
+
+- [Questions for Alec][questions for alec]
+
 ## (Proposed) Timeline
 
 need guidance on this timeline !
