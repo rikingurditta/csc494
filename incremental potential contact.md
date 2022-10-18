@@ -1,8 +1,11 @@
 # Incremental Potential Contact: Intersection- and Inversion-free Large-Deformation Dynamics
 
 $$
+\newcommand{\ds}{\displaystyle}
 \newcommand{\A}{\mathcal A}
 \newcommand{\C}{\mathcal C}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\partials}[2]{\frac{\partial #1}{\partial #2}}
 \DeclareMathOperator{\argmin}{argmin}
 $$
 
@@ -131,7 +134,7 @@ def BarrierAwareProjectedNewton(x_t, e):
     E_prev = Bt(x, dhat, Chat)
     x_prev = x
     do:
-        H = SPDProject(Laplacian(B_t(x, dhat, Chat)))
+        H = SPDProject(Hessian(B_t(x, dhat, Chat)))
         p = - inv(H) * grad(B_t(x, dhat, Chat))
         # CCD line search
         a = min(1, StepSizeUpperBound(x, p, Chat))
@@ -163,7 +166,7 @@ $$
 - $\kappa > 0$ is adaptive conditioning pattern
   - controls barrier stiffness
 
-- naively dealing with this would require evaluating barrier energy for every pair of elements aka $\mathcal O(|\mathcal T|^2)$ pairs
+- naively dealing with this would require evaluating barrier energy for every pair of elements aka $\mathcal O(\abs{\mathcal T}^2)$ pairs
 
 - speed it up by designing smooth barrier functions that vanish past some distance
   - allow for exact and efficient barrier energy computations
@@ -180,7 +183,7 @@ $$
     $$
 
   - $$
-    \dfrac{\partial b}{\partial d}(d, \hat d) = \begin{cases}
+    \partials{b}{d}(d, \hat d) = \begin{cases}
     -ln(\frac{d}{\hat d}) - (d - \hat d)\frac{\hat d}{d}) &\text{if } 0 < d < \hat d \\
     0 &\text{if } d > \hat d
     \end{cases}
@@ -189,3 +192,16 @@ $$
   - as we can see, $\displaystyle \lim_{d \to \hat d} \partial_db(d, \hat d) = 0$. The second derivative is also well defined, i.e. $b$ is $C^2$ around $d = \hat d$, so this function decays smoothly enough to be used for 2nd order methods
 
 - using this barrier function, we only need to evaluate barrier energy for pairs that are closer than $\hat d$ together, which we call the *constraint set* $\hat C(x) = \{k \in C : d_k(x) \leq \hat d\}$
+
+### Newton-type barrier solver
+
+"Projected Newton (PN) methods are second-order unconstrained optimization strategies for minimizing nonlinear nonconvex functions where the Hessian may be indefinite."
+
+each barrier Hessian has the form
+$$
+\partials{^2 b}{d^2} \nabla_x d(\nabla_x d)^T + \partials{b}{d} \nabla_x^2 d
+$$
+
+### Constraint set update
+
+- can calculate constraint set $\Chat(x)$ using spatial hash and bounding volume hierarchy
