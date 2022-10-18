@@ -19,10 +19,9 @@ need guidance on this timeline !
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Sep 27 | functions decided and implementation planned for nested cages (headers created) | notes on IPC contact model, contact mechanics, friction forces |
 | Oct 4  | implementation for nested cages flow done                    | notes on IPC distance computation                            |
-| Oct 11 | implementation for nested cages done aside from contact      |                                                              |
-| Oct 18 | start implementing IPC                                       |                                                              |
-| Nov 8  | finish implementing IPC? who knows                           |                                                              |
+| Oct 11 | implementation for nested cages done aside from contact ???? |                                                              |
+| Oct 18 | start planning IPC                                           |                                                              |
+| Oct 24 | finish planning headers for IPC, finish implementing energies, incorporate TinyAD to get gradients and hessians for free | notes on inversion-aware line search filter [Smith and Schaefer 2015] |
 
 - tinyad - autodiff library
 - start w gradient descent instead of newton's method
-- 

@@ -42,3 +42,9 @@
 ## TinyAD
 
 - how do i set up the cmake properly?
+
+## Gradient descent
+
+- you suggested using gradient descent instead of Newton's method
+- paper suggests using "barrier-aware projected Newton", are you saying replace this with gradient descent?
+- is the idea to do gradient descent but using the filters for intersections and inversions that they suggest to use wihin the line search? (4.4)
