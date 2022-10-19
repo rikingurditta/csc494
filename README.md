@@ -18,10 +18,16 @@ need guidance on this timeline !
 | Date   | Code/Implementation goal                                     | Notes/Understanding goal                                     |
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Sep 27 | functions decided and implementation planned for nested cages (headers created) | notes on IPC contact model, contact mechanics, friction forces |
-| Oct 4  | implementation for nested cages flow done                    | notes on IPC distance computation                            |
-| Oct 11 | implementation for nested cages done aside from contact ???? |                                                              |
-| Oct 18 | start planning IPC                                           |                                                              |
-| Oct 24 | finish planning headers for IPC, finish implementing energies, incorporate TinyAD to get gradients and hessians for free | notes on inversion-aware line search filter [Smith and Schaefer 2015] |
+| Oct 4  | implementation for nested cages flow done (more or less)     | notes on IPC distance computation                            |
+|        |                                                              |                                                              |
+| Oct 18 | start planning IPC headers/structure                         |                                                              |
+| Oct 24 | finish planning headers for IPC, start implementing energies (do barrier energy without constraint set) | partial notes on inversion-aware line search filter [Smith and Schaefer 2015] |
+| Nov 1  | implement constraint set (spatial hash + bvh), finish implementing energies, | finish notes on line search filter                           |
+| Nov 8  | incorporate TinyAD into energies to get gradients and hessians for free, start implementing time step with gradient descent, investi |                                                              |
+| Nov 15 | finish implementing time step with gradient descent, testing, start implementing time step with line search filter |                                                              |
+| Nov 29 | finish implementing time step with line search filter, more testing, start writeup |                                                              |
+|        |                                                              |                                                              |
+| Dec 13 | finish writeup                                               |                                                              |
 
 - tinyad - autodiff library
 - start w gradient descent instead of newton's method

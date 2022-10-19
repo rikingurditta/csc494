@@ -41,7 +41,7 @@
 
 ## TinyAD
 
-- how do i set up the cmake properly?
+- how do i set up the cmake properly? do you have an example project?
 
 ## Gradient descent
 
