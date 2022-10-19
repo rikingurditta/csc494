@@ -9,7 +9,7 @@ This is my repo for notes I've taken for my CSC494 project on augmenting Nested 
 
 ## Other notes
 
-- [Questions for Alec][questions for alec]
+- [Questions for Alec](questions for alec)
 
 ## (Proposed) Timeline
 
@@ -21,10 +21,10 @@ need guidance on this timeline !
 | Oct 4  | implementation for nested cages flow done (more or less)     | notes on IPC distance computation                            |
 |        |                                                              |                                                              |
 | Oct 18 | start planning IPC headers/structure                         |                                                              |
-| Oct 24 | finish planning headers for IPC, start implementing energies (do barrier energy without constraint set) | partial notes on inversion-aware line search filter [Smith and Schaefer 2015] |
-| Nov 1  | implement constraint set (spatial hash + bvh), finish implementing energies, | finish notes on line search filter                           |
-| Nov 8  | incorporate TinyAD into energies to get gradients and hessians for free, start implementing time step with gradient descent, investi |                                                              |
-| Nov 15 | finish implementing time step with gradient descent, testing, start implementing time step with line search filter |                                                              |
+| Oct 24 | finish planning headers for IPC, implement energies (do barrier energy without constraint set) | partial notes on inversion-aware line search filter [Smith and Schaefer 2015] |
+| Nov 1  | implement constraint set (spatial hash + bvh) and update barrier energy, incorporate TinyAD to get gradients and hessians for free | finish notes on line search filter                           |
+| Nov 8  | implement time step with gradient descent, test/investigate  |                                                              |
+| Nov 15 | test more, start implementing time step with line search filter |                                                              |
 | Nov 29 | finish implementing time step with line search filter, more testing, start writeup |                                                              |
 |        |                                                              |                                                              |
 | Dec 13 | finish writeup                                               |                                                              |
