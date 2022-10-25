@@ -1,6 +1,6 @@
 # Questions for Alec
 
-## Gradient of SDF :white_check_mark:
+## Gradient of SDF ✅
 
 ### Quadrature
 
@@ -17,7 +17,7 @@
   - \^have not done that yet
 - if $v$ is also a vertex of $C$, then can average normals of two adjacent edges of $C$
 
-## Test meshes :white_check_mark:
+## Test meshes ✅
 
 - currently creating from scratch
 - can use Matlab gptoolbox `bwmesh` to turn alpha channel of img into mesh
@@ -35,9 +35,10 @@
 
 ![IPC_distance_smoothing_screenshot](IPC_distance_smoothing_screenshot.png)
 
-## Friction
+## Friction ✅
 
 - just want to verify - is it alright to skip friction for nested cages? does not seem necessary here
+- yes, not necessary!
 
 ## TinyAD
 
@@ -47,4 +48,11 @@
 
 - you suggested using gradient descent instead of Newton's method
 - paper suggests using "barrier-aware projected Newton", are you saying replace this with gradient descent?
+  - don't use newton's method, but still need line search
+  - suggested looking at alg 9.2 in boyd to get an idea of backtracking line search
+
 - is the idea to do gradient descent but using the filters for intersections and inversions that they suggest to use wihin the line search? (4.4)
+  - don't need fancy filters, just need our energy to go to $\infty$ for intersections
+
+
+## How will autodiff deal with branches?

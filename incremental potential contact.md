@@ -159,6 +159,7 @@ to enforce distance constraints $d_k(x) > 0$ for all $k \in \C$, we construct co
 - global barrier energy is then $\displaystyle \kappa \sum_{k \in \C} b(d_k(x))$
 
 can augment time step potential energy with global barrier energy:
+
 $$
 B_t(x) = E(x, x^t, v^t) + \kappa \sum_{k \in \C} b(d_k(x))
 $$
@@ -198,6 +199,7 @@ $$
 "Projected Newton (PN) methods are second-order unconstrained optimization strategies for minimizing nonlinear nonconvex functions where the Hessian may be indefinite."
 
 each barrier Hessian has the form
+
 $$
 \partials{^2 b}{d^2} \nabla_x d(\nabla_x d)^T + \partials{b}{d} \nabla_x^2 d
 $$
