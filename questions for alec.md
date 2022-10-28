@@ -44,7 +44,7 @@
 
 - how do i set up the cmake properly? do you have an example project?
 
-## Gradient descent
+## Gradient descent ✅
 
 - you suggested using gradient descent instead of Newton's method
 - paper suggests using "barrier-aware projected Newton", are you saying replace this with gradient descent?
@@ -56,3 +56,11 @@
 
 
 ## How will autodiff deal with branches?
+
+## How do I treat the multiple meshes?
+
+- this is something that I didn't totally follow within the paper
+- everything in the paper is framed as if we are only simulating one mesh
+  - can't just stack positions
+    - in nested cages, we have different masses (infinite vs non infinite)
+    - in general, IPC should work between different materials

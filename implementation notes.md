@@ -32,7 +32,7 @@ $$
 Then
 
 $$
-\p_i'(t) &= \begin{pmatrix} x_{i+1} - x_i \\ y_{i+1} - y_i \end{pmatrix} \\
+\p_i'(t) &= \begin{pmatrix} x_{i+1} - x_i \\ y_{i+1} - y_i \end{pmatrix}
 $$
 
 And taking the line integral,
@@ -61,7 +61,7 @@ $$
 (\a_0 + s \d_0 - \a_1 - t \d_1) \cdot \d_0 &= 0 \\
 \begin{pmatrix} \d_0 & -\d_1 \end{pmatrix} \begin{pmatrix} s \\ t \end{pmatrix} \cdot \d_0 &= (\a_1 - \a_0) \cdot \d_0 \\
 \text{and similarly} \\
-\begin{pmatrix} \d_0 & -\d_1 \end{pmatrix} \begin{pmatrix} s \\ t \end{pmatrix} \cdot \d_1 &= (\a_1 - \a_0) \cdot \d_1 \\
+\begin{pmatrix} \d_0 & -\d_1 \end{pmatrix} \begin{pmatrix} s \\ t \end{pmatrix} \cdot \d_1 &= (\a_1 - \a_0) \cdot \d_1
 \end{align*}
 $$
 
@@ -78,7 +78,9 @@ acs - c^2t + bds - d^2t &= (\a_1 - \a_0) \cdot \d_1 \\
 \begin{pmatrix} a^2 + b^2 & -(ac + bd) \\ ac + bd & -(c^2 + d^2) \end{pmatrix} \begin{pmatrix} s \\ t \end{pmatrix} &= \begin{pmatrix}(\a_1 - \a_0) \cdot \d_0 \\ (\a_1 - \a_0) \cdot \d_1 \end{pmatrix}
 \end{align*}
 $$
+
 Can put this into linalg solve for $\mathbf A \x = \mathbf B$ by defining
+
 $$
 \mathbf A = \begin{pmatrix} a^2 + b^2 & -(ac + bd) \\ ac + bd & -(c^2 + d^2) \end{pmatrix},\ \mathbf B = \begin{pmatrix}(\a_1 - \a_0) \cdot \d_0 \\ (\a_1 - \a_0) \cdot \d_1 \end{pmatrix}
 $$

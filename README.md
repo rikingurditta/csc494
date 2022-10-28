@@ -9,11 +9,10 @@ This is my repo for notes I've taken for my CSC494 project on augmenting Nested 
 
 ## Other notes
 
+- [Implementation notes](implementation notes)
 - [Questions for Alec](questions for alec)
 
 ## (Proposed) Timeline
-
-need guidance on this timeline !
 
 | Date   | Code/Implementation goal                                     | Notes/Understanding goal                                     |
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
