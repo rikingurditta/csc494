@@ -32,7 +32,7 @@ $$
 Then
 
 $$
-\p_i'(t) &= \begin{pmatrix} x_{i+1} - x_i \\ y_{i+1} - y_i \end{pmatrix}
+\p_i'(t) = \begin{pmatrix} x_{i+1} - x_i \\ y_{i+1} - y_i \end{pmatrix}
 $$
 
 And taking the line integral,
