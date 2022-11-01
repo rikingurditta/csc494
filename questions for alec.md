@@ -54,8 +54,9 @@
 - is the idea to do gradient descent but using the filters for intersections and inversions that they suggest to use wihin the line search? (4.4)
   - don't need fancy filters, just need our energy to go to $\infty$ for intersections
 
-
 ## How will autodiff deal with branches?
+
+- alec said it will be fine
 
 ## How do I treat the multiple meshes?
 
@@ -64,3 +65,20 @@
   - can't just stack positions
     - in nested cages, we have different masses (infinite vs non infinite)
     - in general, IPC should work between different materials
+
+## What kind of bounding volume would be best?
+
+- AABB seems good for mesh intersections
+- octree?
+  - would need to move things so maybe not
+
+## SPD projection
+
+### Why do we need the Hessian to be SPD?
+
+- $\mathbf M$ is SPD (symmetric positive definite) if $\mathbf M$ is symmetric and $\mathbf M \mathbf x \cdot \mathbf x \geq 0$
+- is it for using newton's method, since we need to find the root of $\displaystyle \frac{\partial E}{\partial \mathbf x}$ so we need the hessian to be positive to use convex optimization methods like newton's?
+
+### Is there any reading you suggest on how to project a matrix to be SPD
+
+- looks like the reference ([Teran et al 2015](https://www.math.ucla.edu/~jteran/papers/TSIF05.pdf)) says just diagonalize and clamp eigenvalues to 0
