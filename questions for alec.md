@@ -56,7 +56,7 @@
 
 ## How will autodiff deal with branches?
 
-- alec said it will be fine
+- Alec says TinyAD handles everything as long as it's in the for loop given to it
 
 ## How do I treat the multiple meshes?
 
@@ -68,7 +68,9 @@
 
 ## What kind of bounding volume would be best?
 
-- AABB seems good for mesh intersections
+- AABB seems good for mesh intersections ✅
+  - could implement stuff like amortized updates or ford fulkerson intersections but probably not enough benefit for effort
+
 - octree?
   - would need to move things so maybe not
 
@@ -78,7 +80,10 @@
 
 - $\mathbf M$ is SPD (symmetric positive definite) if $\mathbf M$ is symmetric and $\mathbf M \mathbf x \cdot \mathbf x \geq 0$
 - is it for using newton's method, since we need to find the root of $\displaystyle \frac{\partial E}{\partial \mathbf x}$ so we need the hessian to be positive to use convex optimization methods like newton's?
+  - Alec says non convex functions might have a "rotation" in Hessian maybe just for some subspace, but this would cause H * gradient to point in wrong direction for energy minimization
+
 
 ### Is there any reading you suggest on how to project a matrix to be SPD
 
 - looks like the reference ([Teran et al 2015](https://www.math.ucla.edu/~jteran/papers/TSIF05.pdf)) says just diagonalize and clamp eigenvalues to 0
+- Alec says TinyAD does it !! don't need to read about it
