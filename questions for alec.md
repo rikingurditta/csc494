@@ -92,9 +92,18 @@ $$
 - looks like the reference ([Teran et al 2015](https://www.math.ucla.edu/~jteran/papers/TSIF05.pdf)) says just diagonalize and clamp eigenvalues to 0
 - Alec says TinyAD does it !! don't need to read about it
 
+## Smooth min area Green's theorem
+
+- I used Green's theorem to calculate signed area
+- Is there any nice way to change this to $\text{smooth min(Area, 0)}$?
+  - do not want area to go negative
+
 ## Backtracking line search
 
-- how do we use backtracking line search for gradient descent? do we need to make alterations?
+- how do we use backtracking line search for gradient descent?
+- do we need to make alterations?
+  - it looks like it should always .work as written for any convex function and take huge steps
+
 
 backtracking line search alg is:
 $$
@@ -105,7 +114,7 @@ $$
 \end{align*}
 $$
 
-but for gradient descent, $\Delta x = -\nabla f(x)$, so
+for gradient descent, $\Delta x = -\nabla f(x)$, so
 $$
 \begin{align*}
 &\text{while }f(x - t\nabla f(x)) > f(x) - \alpha t \abs{\nabla f(x)}^2 \ \text{ and }\  t > t_\text{min}: \\
@@ -114,4 +123,10 @@ $$
 $$
 then don't we have problems if the function levels off very quickly?
 
-not sure if actually a theoretical problem, but for my program always shrinking $t$ as small as possible
+- no, nvm - Rikin
+
+not sure if actually a theoretical problem, but for my program always shrinking $t$ very small when not necessary
+
+![boyd backtracking line search diagram](boyd backtracking line search diagram.png)
+
+how do we choose $\alpha$? how much gentler do we want the linear extrapolation's slope to be?
