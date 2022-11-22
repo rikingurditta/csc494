@@ -6,10 +6,12 @@ $$
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\a}{\mathbf a}
 \newcommand{\b}{\mathbf b}
-\newcommand{\b}{\mathbf b}
 \newcommand{\d}{\mathbf d}
+\newcommand{\n}{\mathbf n}
 \newcommand{\p}{\mathbf p}
 \newcommand{\x}{\mathbf x}
+\newcommand{\s}{\mathbf s}
+\newcommand{\bv}{\mathbf v}
 \newcommand{\F}{\mathbf F}
 $$
 
@@ -84,3 +86,17 @@ Can put this into linalg solve for $\mathbf A \x = \mathbf B$ by defining
 $$
 \mathbf A = \begin{pmatrix} a^2 + b^2 & -(ac + bd) \\ ac + bd & -(c^2 + d^2) \end{pmatrix},\ \mathbf B = \begin{pmatrix}(\a_1 - \a_0) \cdot \d_0 \\ (\a_1 - \a_0) \cdot \d_1 \end{pmatrix}
 $$
+
+## Calculating vertex-edge distance
+
+The distance between a point $\x$ and a segment $E = \{\bv_0 + s (\bv_1 - \bv_0) : s \in [0, 1]\}$ is the distance from the point to the nearest point on $E$. We can calculate this nearest point by using the orthogonal decomposition of $\x - \bv_0$ with respect to the parallel and normal directions of $E$
+
+Let $\d = \bv_1 - \bv_0$ and $\n = \text{rot}(90\degree) \d$, so if $\d = (a, b)$ then $\n = (b, -a)$
+
+Let $\mathbf M = \begin{pmatrix} \d & \n \end{pmatrix} = \begin{pmatrix} a & b \\ b & -a\end{pmatrix}$, then if $(s, t) = \mathbf M^{-1} (\x - \bv_0)$, then $\x = \bv_0 + s\d + t\n$.
+
+Note that $\bv_0 + s\d$ is along the line that $E$ is a segment of, and if $\hat s = \text{clamp}(s, 0, 1)$, then $\hat \x = \bv_0 + \hat s \d \in E$. We can't do anything about the $t\n$ term since it is perpendicular to $E$, so $\hat \x$ is the closest point to $\x$ on $E$, and the distance from $\x$ to $E$ is $\abs{\x - \hat \x}$.
+
+## Coding plan
+
+![coding plan](PXL_20221101_140652966.jpg)

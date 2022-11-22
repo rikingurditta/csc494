@@ -1,5 +1,9 @@
 # Questions for Alec
 
+$$
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+$$
+
 ## Gradient of SDF ✅
 
 ### Quadrature
@@ -76,14 +80,38 @@
 
 ## SPD projection
 
-### Why do we need the Hessian to be SPD?
+### Why do we need the Hessian to be SPD? ✅
 
 - $\mathbf M$ is SPD (symmetric positive definite) if $\mathbf M$ is symmetric and $\mathbf M \mathbf x \cdot \mathbf x \geq 0$
 - is it for using newton's method, since we need to find the root of $\displaystyle \frac{\partial E}{\partial \mathbf x}$ so we need the hessian to be positive to use convex optimization methods like newton's?
   - Alec says non convex functions might have a "rotation" in Hessian maybe just for some subspace, but this would cause H * gradient to point in wrong direction for energy minimization
 
 
-### Is there any reading you suggest on how to project a matrix to be SPD
+### Is there any reading you suggest on how to project a matrix to be SPD ✅
 
 - looks like the reference ([Teran et al 2015](https://www.math.ucla.edu/~jteran/papers/TSIF05.pdf)) says just diagonalize and clamp eigenvalues to 0
 - Alec says TinyAD does it !! don't need to read about it
+
+## Backtracking line search
+
+- how do we use backtracking line search for gradient descent? do we need to make alterations?
+
+backtracking line search alg is:
+$$
+\begin{align*}
+&\text{backtracking line search:} \\
+&\text{while }f(x + t\Delta x) > f(x) + \alpha t \nabla f \cdot \Delta x \ \text{ and }\  t > t_\text{min}: \\
+&\quad\quad t \gets \beta t
+\end{align*}
+$$
+
+but for gradient descent, $\Delta x = -\nabla f(x)$, so
+$$
+\begin{align*}
+&\text{while }f(x - t\nabla f(x)) > f(x) - \alpha t \abs{\nabla f(x)}^2 \ \text{ and }\  t > t_\text{min}: \\
+&\quad\quad t \gets \beta t
+\end{align*}
+$$
+then don't we have problems if the function levels off very quickly?
+
+not sure if actually a theoretical problem, but for my program always shrinking $t$ as small as possible
