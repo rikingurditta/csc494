@@ -130,3 +130,15 @@ not sure if actually a theoretical problem, but for my program always shrinking 
 ![boyd backtracking line search diagram](boyd backtracking line search diagram.png)
 
 how do we choose $\alpha$? how much gentler do we want the linear extrapolation's slope to be?
+
+## Final writeup
+
+- use judgement on how much detail
+- siggraph conference paper length - 7-8 pages
+
+### Technical issues
+
+- use arrows to vis gradients
+- calc BOTH gradients for barrier energies
+- observe energies before/after step by step
+- throw error if line search fails
