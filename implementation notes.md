@@ -100,3 +100,21 @@ Note that $\bv_0 + s\d$ is along the line that $E$ is a segment of, and if $\hat
 ## Coding plan
 
 ![coding plan](PXL_20221101_140652966.jpg)
+
+## Quirks of energies
+
+### Area
+
+- possible to invert the coarse mesh, in which case area is negative
+
+  - this is really bad!
+
+  - can deal with this by returning $\infty$ instead of negative values
+
+  - ```
+    def area_energy(V, E):
+        Area = integrate area using green's theorem
+        if (Area < 0)
+            Area = Infinity
+        return Area
+    ```
