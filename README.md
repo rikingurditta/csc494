@@ -2,6 +2,8 @@
 
 This is my repo for notes I've taken for my CSC494 project on augmenting Nested Cages with IPC that I'm doing over the Fall 2022 semester. The project is supervised by [Professor Alec Jacobson](https://www.cs.toronto.edu/~jacobson/).
 
+[Here's my code](https://github.com/rikingurditta/csc494-code), and [here's my writeup](./CSC494_Report.pdf) as I submitted it on December 26 2022.
+
 ## Notes on relevant papers
 
 - [Nested Cages](nested cages)
