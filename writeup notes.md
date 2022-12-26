@@ -25,6 +25,9 @@ $$
 
 ## Related work
 
+- original nested cages
+- original IPC
+
 ## Method
 
 - flow (keep this brief since focus is on IPC)
@@ -80,8 +83,8 @@ $$
 
 - flow
   - no improvement on SDF flow which was main place where nested cages went wrong (still subject to impossible cases)
-  - more sophisticated quadrature schemes may be faster
-    - original paper used barycentre, which experimentally was inadequate
+  - more sophisticated quadrature schemes may be more accurate and thus faster/more robust
+    - original paper used barycentre, which experimentally was inadequate for our 2D case
 - need to compute global intersection tests
   - original IPC has options for primitive-primitive distances, developes edge-edge distance differentiability
   - edge-edge distances for barriers may be useful because if they are maintained as nonzero then we don't need to check intersections
